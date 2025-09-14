@@ -1,25 +1,15 @@
-const User = require('../models/user');
 const Message = require('../models/message');
+const User = require('../models/user_app');
 
 
 const userConnected = async (uid)=> {
-    const user = await User.findById(uid);
-    user.online = true;
-    await user.save();
-    return user;
-}
-
-const userDisconnected = async (uid)=> {
-    const user = await User.findById(uid);
-    user.online = false;
-    await user.save();
+    const user = await User.findByPk(uid);
     return user;
 }
 
 const saveMessage = async (payload)=>{
     try {
-        const mensage = new Message(payload);
-        await mensage.save();
+        await Message.create(payload);
         return true;
     } catch (error) {
         return false;
@@ -28,6 +18,5 @@ const saveMessage = async (payload)=>{
 
 module.exports = {
     userConnected,
-    userDisconnected,
     saveMessage
 }

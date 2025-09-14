@@ -1,27 +1,33 @@
-const { Schema, model } = require('mongoose');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../database/config');
 
-const MessageSchema = Schema({
-    from:{
-        type: Schema.Types.ObjectId,
+const Message = sequelize.define('Message',{
+    message_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    sender_id:{
+        type: DataTypes.INTEGER,
         ref: 'User',
         require: true
     },
-    to:{
-        type: Schema.Types.ObjectId,
+    receiver_id:{
+        type: DataTypes.INTEGER,
         ref: 'User',
         require: true,
     },
     message: {
         type: String,
         require: true
+    },
+    send_date: {
+        type: DataTypes.DATE,
+        allowNull: false
     }
 }, {
-    timestamps: true
+    tableName: 'message',
+    timestamps: false
 });
 
-MessageSchema.method('toJSON', function(){
-    const { __v, _id, ...object  } = this.toObject();
-    return object
-});
-
-module.exports = model('Message', MessageSchema);
+module.exports = Message;

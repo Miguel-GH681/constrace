@@ -1,15 +1,9 @@
-const User = require('../models/user');
+const User = require('../models/user_app');
+const sequelize = require('../database/config');
 
 const getUsers = async (req, res)=>{
 
-    const since = Number(req.query.since) ?? 0;
-    const limit = Number(req.query.limit) ?? 5;
-
-    const users = await User
-        .find({ _id: { $ne: req.uid } })
-        .sort('-online')
-        .skip(since)
-        .limit(limit);
+    const users = await User.findAll();
 
     res.json({
         ok: true,
