@@ -5,7 +5,6 @@ const getMessages = async (req, res) => {
   try {
     const fromId = req.user_id;
     const toId = req.params.id;
-    console.log(fromId, toId);
     
     const messages = await Message.findAll({
       where: {

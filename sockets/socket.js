@@ -12,7 +12,7 @@ io.on('connection', client => {
     
     client.on('mensaje-personal', async (payload)=>{        
         await saveMessage( payload );
-        io.to(payload.to).emit('mensaje-personal', payload);
+        io.to(payload.receiver_id).emit('mensaje-personal', payload);
     });
 
     client.on('disconnect', ()=>{

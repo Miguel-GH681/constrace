@@ -18,6 +18,8 @@ sequelize.authenticate().then(()=>{
     app.use( '/api/user', require('./routes/user'));
     app.use( '/api/message', require('./routes/message'));
     app.use( '/api/project', require('./routes/project'));
+    app.use( '/api/task', require('./routes/task'));
+
 
     server.listen( process.env.SERVER_PORT, ( err ) => {
 
