@@ -7,6 +7,10 @@ const Message = sequelize.define('Message',{
         primaryKey: true,
         autoIncrement: true
     },
+    project_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     sender_id:{
         type: DataTypes.INTEGER,
         ref: 'User',
